@@ -11,6 +11,7 @@ public class Factorial {
             factorial = factorial * currentFac;
         }
 
+        
         System.out.println("Factorial of " + NUMBER + " = " + factorial);
     }
 
