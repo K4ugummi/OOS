@@ -45,9 +45,9 @@ public class Uebung1_7 {
         }
     }
 
-        static class Bsp extends Auto {
+        static class Bsp {
             void ändereFarbe(String farbe) {
-                this.farbe = "rot";
+                farbe = "rot";
             }
         }
 
