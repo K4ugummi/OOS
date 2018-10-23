@@ -2,7 +2,11 @@ package Praktikum_1;
 
 public class A2_Punkt_Kreis {
     public static void main(String[] args) {
-        System.out.println("It works!");
+        System.out.println("Praktikum_1::KreisVererb::Tests");
+        
+        Point p = new Point(1, 2);
+        KreisVererb k = new KreisVererb(p);
+        System.out.println(p + "\n" + k);
     }
 }
 
@@ -49,7 +53,7 @@ class Point {
     }
     
     public String toString() {
-        return "Point { x: " + this.x + " y: " + this.y + " }";
+        return "Point { x:" + this.x + " y:" + this.y + " }";
     }
 }
 
@@ -59,6 +63,40 @@ class KreisVererb extends Point {
     public KreisVererb() {
         super();
         this.radius = 1.f;
+    }
+    
+    public KreisVererb(Point p) {
+        super(p);
+        this.radius = 1.f;
+    }
+    
+    public KreisVererb(int x, int y) {
+        super(x, y);
+        this.radius = 1.f;
+    }
+    
+    public KreisVererb(Point p, float radius) {
+        super(p);
+        this.radius = radius;
+    }
+    
+    public KreisVererb(int x, int y, float radius) {
+        super(x, y);
+        this.radius = radius;
+    }
+    
+    public float getRadius() {
+        return this.radius;
+    }
+    
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
+    
+    public String toString() {
+        return "KreisVererb { x:" + this.x 
+                + " y:" + this.y 
+                + " radius:" + this.radius +" }";
     }
 }
 

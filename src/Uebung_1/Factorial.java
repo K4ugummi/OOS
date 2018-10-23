@@ -1,3 +1,4 @@
+package Uebung_1;
 // Calculate factorial of static final long NUMBER.
 public class Factorial {
 

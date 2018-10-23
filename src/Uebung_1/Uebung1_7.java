@@ -1,3 +1,4 @@
+package Uebung_1;
 
 public class Uebung1_7 {
     // Klassendefinition:

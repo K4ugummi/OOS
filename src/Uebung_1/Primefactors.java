@@ -1,3 +1,4 @@
+package Uebung_1;
 // Calculate prime factors for a hard coded static final int NUMBER.
 public class Primefactors {
 
