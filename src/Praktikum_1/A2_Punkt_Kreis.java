@@ -20,7 +20,7 @@ package Praktikum_1;
 public class A2_Punkt_Kreis {
     public static void main(String[] args) {
         System.out.println("Praktikum_1::KreisVererb::Tests");
-        
+
         Point p = new Point(1, 2);
         KreisVererb k = new KreisVererb(p);
         System.out.println(p + "\n" + k);
@@ -33,8 +33,9 @@ public class A2_Punkt_Kreis {
 class Point {
     // Private coordinates.
     int x;
+
     int y;
-    
+
     /**
      * Default constructor which set the Points coordinates to (0, 0)
      */
@@ -42,7 +43,7 @@ class Point {
         this.x = 0;
         this.y = 0;
     }
-    
+
     /**
      * Constructor which takes in another Point.
      */
@@ -50,7 +51,7 @@ class Point {
         this.x = p.x;
         this.y = p.y;
     }
-    
+
     /**
      * Constructor which takes in x- and y-coordinate as integers.
      */
@@ -58,7 +59,7 @@ class Point {
         this.x = x;
         this.y = y;
     }
-    
+
     /**
      * Getter of the location of a Point. (I'm not sure how useful it is to
      * return another point from this method, but thats how the UML diagram
@@ -67,18 +68,20 @@ class Point {
     public Point getLocation() {
         return this;
     }
-    
+
     /**
      * Setter to apply new coordinates to the Point from another Point.
+     * 
      * @param p
      */
     public void setLocation(Point p) {
         this.x = p.x;
         this.y = p.y;
     }
-    
+
     /**
      * Setter to apply new coordinates to the Point via the coordinates (x, y)
+     * 
      * @param x
      * @param y
      */
@@ -86,9 +89,10 @@ class Point {
         this.x = x;
         this.y = y;
     }
-    
+
     /**
      * Moves the point by the given delta for each axis.
+     * 
      * @param dx
      * @param dy
      */
@@ -96,16 +100,17 @@ class Point {
         this.x += dx;
         this.y += dy;
     }
-    
+
     /**
      * Checks if a point is equal to another one.
+     * 
      * @param p
      * @return
      */
     public boolean equals(Point p) {
         return this.x == p.x && this.y == p.y;
     }
-    
+
     /**
      * Overrides the default toString() function for Object.
      */
@@ -114,50 +119,89 @@ class Point {
     }
 }
 
+/**
+ * A Circle in 2D space with integer coordinates and float radius. This is our
+ * superclasses.
+ */
 class KreisVererb extends Point {
     float radius;
-    
+
+    /**
+     * Default constructor for our Circle. Position is the coordinate origin and
+     * radius is 1.0f.
+     */
     public KreisVererb() {
         super();
         this.radius = 1.f;
     }
-    
+
+    /**
+     * Constructor to create a Circle at Point p with a default radius of 1.0f.
+     * 
+     * @param p
+     */
     public KreisVererb(Point p) {
         super(p);
         this.radius = 1.f;
     }
-    
+
+    /**
+     * Constructor to create a Circle at (x, y) with a default radius if 1.0f.
+     * 
+     * @param x
+     * @param y
+     */
     public KreisVererb(int x, int y) {
         super(x, y);
         this.radius = 1.f;
     }
-    
+
+    /**
+     * Constructor to create a Circle at Point p with a radius.
+     * 
+     * @param p
+     * @param radius
+     */
     public KreisVererb(Point p, float radius) {
         super(p);
         this.radius = radius;
     }
-    
+
+    /**
+     * Constructor to create a Circle at (x, y) with a radius.
+     * 
+     * @param x
+     * @param y
+     * @param radius
+     */
     public KreisVererb(int x, int y, float radius) {
         super(x, y);
         this.radius = radius;
     }
-    
+
+    /**
+     * Returns the radius of the circle.
+     * 
+     * @return
+     */
     public float getRadius() {
         return this.radius;
     }
-    
+
+    /**
+     * Sets the radius of the circle.
+     * 
+     * @param radius
+     */
     public void setRadius(float radius) {
         this.radius = radius;
     }
-    
+
+    /**
+     * Override the toString method for KreisVererb.
+     */
     public String toString() {
-        return "KreisVererb { x:" + this.x 
-                + " y:" + this.y 
-                + " radius:" + this.radius +" }";
+        return "KreisVererb { x:" + this.x + " y:" + this.y + " radius:"
+                + this.radius + " }";
     }
 }
-
-
-
-
-

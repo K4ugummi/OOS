@@ -14,8 +14,8 @@
 package Praktikum_1;
 
 /**
- * This Program consists of just a main function which calculates the 
- * Pascal's triangle.
+ * This Program consists of just a main function which calculates the Pascal's
+ * triangle.
  */
 public class A1_Pascalsches_Dreieck {
 
