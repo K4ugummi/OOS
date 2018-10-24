@@ -5,6 +5,7 @@ public class A3_Aggregation {
         Geometrie[] geo = new Geometrie[4];
         geo[0] = new Rechteck(0, 0, 1, 1);
         geo[1] = new Rechteck(1, 1, 2, 2);
+        // Give this circles a nice radius to get a goo sum
         geo[2] = new KreisAgg(0, 0, 1.0f / (float)Math.sqrt(Math.PI));
         geo[3] = new KreisAgg(1, 1, 1.0f / (float)Math.sqrt(Math.PI));
 
