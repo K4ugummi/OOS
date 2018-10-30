@@ -15,7 +15,7 @@
 package Praktikum_1;
 
 /**
- * Unit tests of our inheritance example (Point -> KreisVererb)
+ * Unit tests of our inheritance example (Point - KreisVererb)
  */
 public class A2_Punkt_Kreis {
     public static void main(String[] args) {
@@ -23,6 +23,7 @@ public class A2_Punkt_Kreis {
 
         Point p = new Point(1, 2);
         KreisVererb k = new KreisVererb(p);
+        p = new Point(2, 3);
         System.out.println(p + "\n" + k);
     }
 }

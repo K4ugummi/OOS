@@ -17,13 +17,17 @@
 package Praktikum_1;
 
 public class A3_Aggregation {
+
+    // A square root of pi with floating point precision.
+    static final float SQRT_PI_F = (float) Math.sqrt(Math.PI);
+
     public static void main(String[] args) {
         Geometrie[] geo = new Geometrie[4];
         geo[0] = new Rechteck(0, 0, 1, 1); // A = 1.0f;
         geo[1] = new Rechteck(1, 1, 2, 2); // A = 1.0f;
         // Give this circles a nice radius to get a good sum of A
-        geo[2] = new KreisAgg(0, 0, 1.0f / (float) Math.sqrt(Math.PI));
-        geo[3] = new KreisAgg(1, 1, 1.0f / (float) Math.sqrt(Math.PI));
+        geo[2] = new KreisAgg(0, 0, 1.0f / SQRT_PI_F);
+        geo[3] = new KreisAgg(1, 1, 1.0f / SQRT_PI_F);
 
         float gesamtFlaeche = 0.0f;
         for (int i = 0; i < geo.length; i++) {
@@ -106,6 +110,11 @@ class KreisAgg extends Geometrie {
 
     public KreisAgg(Point center) {
         this.center = new Point(center);
+        this.radius = 1.0f;
+    }
+    
+    public KreisAgg(int x, int y) {
+        this.center = new Point(x, y);
         this.radius = 1.0f;
     }
 
