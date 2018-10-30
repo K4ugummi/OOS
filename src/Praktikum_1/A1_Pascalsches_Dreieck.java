@@ -1,6 +1,6 @@
 /**
  * <h2>Title: Praktikum 1, Aufgabe 1 </h2>
- * <p>Description: This class contains a program that calculates the
+ * <p>Description: This file contains a program that calculates the
  * Pascal's triangle up to a depth of MAX_DEPTH and prints it to the
  * default output. The special feature that is used here is that you can
  * can create triangular arrays instead of rectangular ones in Java.</p>
@@ -19,13 +19,15 @@ package Praktikum_1;
  */
 public class A1_Pascalsches_Dreieck {
 
-    // Constant max depth the program calculates to.
+    // Constant max depth the program calculates the Pascal's triangle to.
     static final int MAX_DEPTH = 9;
 
     public static void main(String[] args) {
         // Init the number of rows.
         int[][] dreieck = new int[MAX_DEPTH + 1][];
 
+        // Calculate each row of a Pascal's triangle, where row represents
+        // the current depth.
         for (int row = 0; row <= MAX_DEPTH; row++) {
             // Init the length of the current row.
             dreieck[row] = new int[row + 1];

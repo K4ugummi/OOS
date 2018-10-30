@@ -1,6 +1,6 @@
 /**
  * <h2>Title: Praktikum 1, Aufgabe 3 </h2>
- * <p>Description: This class contains an example of aggregation in java.
+ * <p>Description: This file contains an example of aggregation in java.
  * To show this we use the class Point of Uebung 2, Aufgabe 11 as a member of
  * two new classes Rechteck and KreisAgg. Those two are subclasses
  * of an abstract class Geometry which lets us implement the function
@@ -43,7 +43,7 @@ public class A3_Aggregation {
  * Abstract class Geometry lets us implement the function flaechenInhalt for
  * different subclasses.
  * 
- * @author stephan
+ * @author Stephan Schauerte
  */
 abstract class Geometrie {
     abstract float flaechenInhalt();
@@ -56,98 +56,177 @@ abstract class Geometrie {
  * @author Stephan Schauerte
  */
 class Rechteck extends Geometrie {
+    /**
+     * Minimum spanning Point 
+     */
     Point min;
 
+    /**
+     * Maximum spanning Point
+     */
     Point max;
 
+    /**
+     * Default Constructor to create a rectangle. WARNING! MIN=(0, 0) AND
+     * MAX=(0, 0).
+     */
     public Rechteck() {
         this.min = new Point();
         this.max = new Point();
     }
 
+    /**
+     * Constructor to create a Rechteck spanning from Point min to Point max.
+     * @param min
+     * @param max
+     */
     public Rechteck(Point min, Point max) {
         this.min = new Point(min);
         this.max = new Point(max);
     }
 
+    /**
+     * Constructor to create a Rechteck spanning from (minX, minY) to 
+     * (maxX, maxY).
+     * @param minX
+     * @param minY
+     * @param maxX
+     * @param maxY
+     */
     public Rechteck(int minX, int minY, int maxX, int maxY) {
         this.min = new Point(minX, minY);
         this.max = new Point(maxX, maxY);
     }
 
+    /**
+     * Compare one Rechteck with another one. Returns true if
+     * this.min == other.min and this.max == other.max.
+     */
     public boolean equals(Object other) {
         assert (other instanceof Rechteck);
         return this.min == ((Rechteck) other).min
                 && this.max == ((Rechteck) other).max;
     }
 
+    /**
+     * Returns a copy of this Rechteck.
+     */
     public Rechteck clone() {
         return new Rechteck(this.min, this.max);
     }
 
+    /**
+     * String formatter for Rechteck.
+     */
     public String toString() {
         return "Rechteck { min:" + this.min.toString() + " max:"
                 + this.max.toString() + " }";
     }
 
+    /**
+     * Returns the are of the Rechteck.
+     */
     public float flaechenInhalt() {
         return (float) ((this.max.x - this.min.x) * (this.max.y - this.min.y));
     }
 }
 
+/**
+ * KreisAgg is an example of aggregation in Java. A KreisAgg represents a
+ * circle in 2D space with integer coordinates and a floating point radius.
+ * @author Stephan Schauerte
+ *
+ */
 class KreisAgg extends Geometrie {
     Point center;
 
     float radius;
 
     /**
-     * Many constructors...
+     * Default constructor. Creates a KreisAgg at position (0, 0) with radius
+     * 1.0f.
      */
     public KreisAgg() {
         this.center = new Point();
         this.radius = 1.0f;
     }
 
+    /**
+     * Creates a KreisAgg at Point center with a radius of 1.0f.
+     * @param center
+     */
     public KreisAgg(Point center) {
         this.center = new Point(center);
         this.radius = 1.0f;
     }
     
+    /**
+     * Creates a KreisAgg at (x, y) with a radius of 1.0f.
+     * @param x
+     * @param y
+     */
     public KreisAgg(int x, int y) {
         this.center = new Point(x, y);
         this.radius = 1.0f;
     }
 
+    /**
+     * Creates a KreisAgg at Point center with a given radius.
+     * @param center
+     * @param radius
+     */
     public KreisAgg(Point center, float radius) {
         this.center = new Point(center);
         this.radius = radius;
     }
 
+    /**
+     * Creates a KreisAgg at (x, y) with a given radius.
+     * @param x
+     * @param y
+     * @param radius
+     */
     public KreisAgg(int x, int y, float radius) {
         this.center = new Point(x, y);
         this.radius = radius;
     }
 
+    /**
+     * Creates a KreisAgg at (0, 0) with a given radius.
+     * @param radius
+     */
     public KreisAgg(float radius) {
         this.center = new Point();
         this.radius = radius;
     }
 
+    /**
+     * Compares an Object with another one.
+     */
     public boolean equals(Object other) {
         assert (other instanceof KreisAgg);
         return this.center == ((KreisAgg) other).center
                 && this.radius == ((KreisAgg) other).radius;
     }
 
+    /**
+     * Returns a copy of KreisAgg.
+     */
     public KreisAgg clone() {
         return new KreisAgg(this.center, this.radius);
     }
 
+    /**
+     * String formatter for KreisAgg.
+     */
     public String toString() {
         return "KreisAgg { center:" + this.center.toString() + " radius:"
                 + this.radius + " }";
     }
 
+    /**
+     * Returns the are of KreisAgg.
+     */
     public float flaechenInhalt() {
         return (float) (this.radius * this.radius * Math.PI);
     }

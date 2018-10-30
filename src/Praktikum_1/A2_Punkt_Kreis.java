@@ -1,6 +1,6 @@
 /**
  * <h2>Title: Praktikum 1, Aufgabe 2 </h2>
- * <p>Description: This class contains an example of inheritance in java
+ * <p>Description: This file contains an example of inheritance in java
  * for this we use the class Point of Uebung 2, Aufgabe 11 as a superclass.
  * KreisVererb, which means CircleInheri(ted) in german is our subclass.
  * The main function in this file is used as a unit test, because unit test
@@ -20,11 +20,55 @@ package Praktikum_1;
 public class A2_Punkt_Kreis {
     public static void main(String[] args) {
         System.out.println("Praktikum_1::KreisVererb::Tests");
+        
+        // Test: Point()
+        System.out.println("# Test: Point()");
+        System.out.println(new Point().toString());
+        System.out.println("");    
+        
+        // Test: Point(Point(1, 2))
+        System.out.println("# Test: Point(Point(1, 2)");
+        System.out.println(new Point(new Point(1, 2)).toString());
+        System.out.println("");
+        
+        // Test: Point(1, 2)
+        System.out.println("# Test: Point(1, 2)");
+        System.out.println(new Point(1, 2).toString());
+        System.out.println("");
+        
+        // Test: Point(2, 3).getLocation()
+        System.out.println("# Test: Point(2, 3).getLocation()");
+        System.out.println(new Point(2, 3).getLocation());
+        System.out.println("");
+        
+        // Test: Point(2, 3).getLocation()
+        System.out.println("# Test: Point().setLocation(1, 2)");
+        Point pSetLocation = new Point();
+        pSetLocation.setLocation(1, 1);
+        System.out.println(pSetLocation.toString());
+        System.out.println("");
 
+        // Test: Constructor of Point and KreisVererb
+        System.out.println("# Test: Constructor of Point and KreisVererb");
         Point p = new Point(1, 2);
         KreisVererb k = new KreisVererb(p);
-        p = new Point(2, 3);
-        System.out.println(p + "\n" + k);
+        System.out.println("p:" + p + "\n" + "k: " + k);
+        System.out.println("");
+        
+        // Test: Point == KreisVererb
+        System.out.println("# Test: Point == KreisVererb");
+        if (p == k) {
+            System.out.println("p == k, k was created from p");
+        }
+        else {
+            System.out.println("p != k, k was created from p");
+        }
+        System.out.println("");
+        
+        // Test: Casting KreisVererb to Point
+        System.out.println("# Test: Casting KreisVererb to Point");
+        System.out.println("# Print (Point)k");
+        System.out.println((Point)k);
     }
 }
 
@@ -32,9 +76,14 @@ public class A2_Punkt_Kreis {
  * A Point in 2D space with integer coordinates. This is our superclass.
  */
 class Point {
-    // Private coordinates.
+    /**
+     * X Coordinate of the Point.
+     */
     int x;
 
+    /**
+     * Y Coordinate of the Point.
+     */
     int y;
 
     /**
