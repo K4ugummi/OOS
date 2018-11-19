@@ -47,6 +47,16 @@ public class A2_Punkt_Kreis {
         pSetLocation.setLocation(1, 1);
         System.out.println(pSetLocation.toString());
         System.out.println("");
+        
+        // Test: KreisVererb(1, 2)
+        System.out.println("# Test: KreisVererb(1, 2)");
+        System.out.println(new KreisVererb(1, 2).toString());
+        System.out.println("");
+        
+        // Test: KreisVererb(1, 2)
+        System.out.println("# Test: KreisVererb(1, 2, 2.0f)");
+        System.out.println(new KreisVererb(1, 2, 2.0f).toString());
+        System.out.println("");
 
         // Test: Constructor of Point and KreisVererb
         System.out.println("# Test: Constructor of Point and KreisVererb");
@@ -68,7 +78,7 @@ public class A2_Punkt_Kreis {
         // Test: Casting KreisVererb to Point
         System.out.println("# Test: Casting KreisVererb to Point");
         System.out.println("# Print (Point)k");
-        System.out.println((Point)k);
+        System.out.println(((Point)k).toString());
     }
 }
 
@@ -227,6 +237,18 @@ class KreisVererb extends Point {
     public KreisVererb(int x, int y, float radius) {
         super(x, y);
         this.radius = radius;
+    }
+
+    /**
+     * Constructor to create a Circle at (x, y) with a radius.
+     * 
+     * @param x
+     * @param y
+     * @param radius
+     */
+    public KreisVererb(KreisVererb k) {
+        super(k);
+        this.radius = k.radius;
     }
 
     /**

@@ -45,8 +45,8 @@ public class A3_Aggregation {
  * 
  * @author Stephan Schauerte
  */
-abstract class Geometrie {
-    abstract float flaechenInhalt();
+interface Geometrie {
+    float flaechenInhalt();
 }
 
 /**
@@ -55,7 +55,7 @@ abstract class Geometrie {
  * 
  * @author Stephan Schauerte
  */
-class Rechteck extends Geometrie {
+class Rechteck implements Geometrie, Comparable {
     /**
      * Minimum spanning Point 
      */
@@ -129,6 +129,12 @@ class Rechteck extends Geometrie {
     public float flaechenInhalt() {
         return (float) ((this.max.x - this.min.x) * (this.max.y - this.min.y));
     }
+
+    @Override
+    public int compareTo(Object o) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }
 
 /**
@@ -137,7 +143,7 @@ class Rechteck extends Geometrie {
  * @author Stephan Schauerte
  *
  */
-class KreisAgg extends Geometrie {
+class KreisAgg implements Geometrie {
     Point center;
 
     float radius;

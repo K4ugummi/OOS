@@ -31,15 +31,12 @@ public class A1_Pascalsches_Dreieck {
         for (int row = 0; row <= MAX_DEPTH; row++) {
             // Init the length of the current row.
             dreieck[row] = new int[row + 1];
+            dreieck[row][0] = 1;
+            dreieck[row][row] = 1;
 
-            for (int col = 0; col <= row; col++) {
-                // If it is the first or last number of a row.
-                if (col == 0 || col == row) {
-                    dreieck[row][col] = 1;
-                } else {
-                    dreieck[row][col] = dreieck[row - 1][col - 1]
-                            + dreieck[row - 1][col];
-                }
+            for (int col = 1; col < row; col++) {
+                dreieck[row][col] = dreieck[row - 1][col - 1]
+                        + dreieck[row - 1][col];
                 System.out.print(dreieck[row][col] + " ");
             }
             System.out.print("\n");
