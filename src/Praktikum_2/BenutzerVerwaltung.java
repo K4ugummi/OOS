@@ -10,9 +10,13 @@ public interface BenutzerVerwaltung {
     /**
      * 
      * @param benutzer
+     *            userId and passWort to add to the user list
      * @throws BenutzerVerwaltungsSystem
+     *             Internal exception when something unknown goes wrong.
      * @throws BenutzerVorhanden
+     *             User already exists and can not be added to the list.
      * @throws PasswortRichtlinie
+     *             Conflict with the password policy.
      */
     void benutzerEintragen(Benutzer benutzer) throws BenutzerVerwaltungsSystem,
             BenutzerVorhanden, PasswortRichtlinie;
@@ -23,7 +27,9 @@ public interface BenutzerVerwaltung {
      * match.
      * 
      * @param benutzer
-     * @return
+     *            Check if combination of userId and passWort exist in the list.
+     * @return True: User with passed userId and passWort exists. False: User
+     *         does not exist.
      */
     boolean benutzerOk(Benutzer benutzer);
 }

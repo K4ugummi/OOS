@@ -1,7 +1,17 @@
 package Praktikum_2;
 
+/**
+ * This praktikum focuses on handling exceptions in java.
+ * @author Stephan Schauerte
+ *
+ */
 public class Praktikum2 {
 
+    /**
+     * Test the implemented user managing system and the possible exceptions.
+     * 
+     * @param args
+     */
     public static void main(String[] args) {
         BenutzerVerwaltungAdmin admin = new BenutzerVerwaltungAdmin();
 
@@ -21,23 +31,22 @@ public class Praktikum2 {
         System.out.println("Benutzer2 = " + benutzer2.toString());
         System.out.println("BenutzerZuKurz = " + benutzerZuKurz.toString());
         System.out.println("BenutzerZuLang = " + benutzerZuLang.toString());
+        System.out.println("");
 
-        if (benutzer1.equals(benutzer2)) {
-            System.out.println("Benutzer1 == Benutzer2");
-        } else {
-            System.out.println("Benutzer1 != Benutzer2");
-        }
+        System.out.println("Benutzer1.equals(Benutzer1): " 
+                + benutzer1.equals(benutzer1));
+        System.out.println("Benutzer1.equals(Benutzer2): " 
+                + benutzer1.equals(benutzer2));
+        System.out.println("Benutzer1.equals(Benutzer1Clone): " 
+                + benutzer1.equals(benutzer1clone));
 
-        if (benutzer1.equals(benutzer1)) {
-            System.out.println("Benutzer1 == Benutzer1");
-        } else {
-            System.out.println("Benutzer1 != Benutzer1");
-        }
-        if (benutzer1.equals(benutzer1clone)) {
-            System.out.println("Benutzer1 == Benutzer1clone");
-        } else {
-            System.out.println("Benutzer1 != Benutzer1clone");
-        }
+        System.out.println("Benutzer1 == Benutzer1: " 
+                + (benutzer1 == benutzer1));
+        System.out.println("Benutzer1 == Benutzer2: " 
+                + (benutzer1 == benutzer2));
+        System.out.println("Benutzer1 == Benutzer1Clone: " 
+                + (benutzer1 == benutzer1clone));
+        System.out.println("");
 
         // Add user to the user list. No exception should be thrown here.
         System.out.println("Test: Passwort zu kurz...");
@@ -56,6 +65,7 @@ public class Praktikum2 {
         } catch (Exception e) {
             System.out.println("Exception aufgefangen: " + e.getMessage());
         }
+        System.out.println("");
 
         // Add user to the user list. No exception should be thrown here.
         System.out.println("Test: Benutzer1 hinzufuegen...");
@@ -101,6 +111,7 @@ public class Praktikum2 {
         } catch (Exception e) {
             System.out.println("Exception aufgefangen: " + e.getMessage());
         }
+        System.out.println("");
 
         // Add another user to the user list.
         System.out.println("Test: Benutzer2 einfuegen");

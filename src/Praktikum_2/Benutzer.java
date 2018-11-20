@@ -44,6 +44,7 @@ public class Benutzer {
      * Check if the userId and passWort of both Benutzer match.
      */
     public boolean equals(Object other) {
+        // TODO: remove assertion!
         if (other instanceof Benutzer) {
             boolean isEqualId = this.userId.equals(((Benutzer) other).userId);
             boolean isEqualPw = String.copyValueOf(this.passWort)
@@ -56,7 +57,7 @@ public class Benutzer {
     }
 
     /**
-     * 
+     * Override the toString() method for Benutzer.
      */
     public String toString() {
         return "Benutzer { userId:" + this.userId + " passWort: "

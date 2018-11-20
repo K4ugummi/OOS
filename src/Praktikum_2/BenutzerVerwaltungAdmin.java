@@ -2,21 +2,35 @@ package Praktikum_2;
 
 import java.util.Vector;
 
+/**
+ * Managing class that implements BenutzerVerwalrtung to handle users.
+ * @author Stephan Schauerte
+ *
+ */
 public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
 
+    /**
+     * Defines a maximum password length for a new user..
+     */
     private static final int PASSWORT_MAX = 32;
 
+    /**
+     * Defines a minimum password length for a new user.
+     */
     private static final int PASSWORT_MIN = 4;
 
-    /// Better use a hash map for large amounts of users.
+    /// Better use a hash map for a large amount of users.
     private Vector<Benutzer> benutzerListe;
 
-    BenutzerVerwaltungAdmin() {
+    /**
+     * Default contructor.
+     */
+    public BenutzerVerwaltungAdmin() {
         this.benutzerListe = new Vector<Benutzer>();
     }
 
     /**
-     * 
+     * Try to add a user to the user list.
      */
     @Override
     public void benutzerEintragen(Benutzer benutzer)
@@ -25,6 +39,7 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
         if (benutzerVorhanden(benutzer)) {
             throw new BenutzerVorhanden("Der Benutzer existiert bereits!");
         } else {
+            // Check settings like password length.
             if (benutzer.passWort.length < 4) {
                 throw new PasswortRichtlinie(
                         "Das passWort ist zu kurz!" + " Es sollte mindestens "
@@ -46,8 +61,12 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
      * Removes the user from the user list if it exists.
      * 
      * @param benutzer
+     *            userId and passWort of the user to delete.
      * @throws BenutzerVerwaltungsSystem
+     *             Internal error
      * @throws BenutzerNichtVorhanden
+     *             User is not in list or the combination of userId and passWort
+     *             is wrong.
      */
     public void benutzerLoeschen(Benutzer benutzer)
             throws BenutzerVerwaltungsSystem, BenutzerNichtVorhanden {
@@ -74,11 +93,11 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
      * 
      * @param benutzer
      *            User to check
-     * @return
+     * @return True: If the userId already exists. False: If not.
      */
     public boolean benutzerVorhanden(Benutzer benutzer) {
-        for (Benutzer cur : this.benutzerListe) {
-            if (cur.userId.equals(benutzer.userId)) {
+        for (Benutzer curBenutzer : this.benutzerListe) {
+            if (curBenutzer.userId.equals(benutzer.userId)) {
                 return true;
             }
         }
