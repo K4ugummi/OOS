@@ -23,14 +23,14 @@ public class Praktikum2 {
         Benutzer benutzer1clone = new Benutzer("Stephan", passwort);
         Benutzer benutzer2 = new Benutzer("Michael", passwort);
 
-        Benutzer benutzerZuKurz = new Benutzer("Kurz", kurz);
-        Benutzer benutzerZuLang = new Benutzer("Lang", lang);
+        Benutzer benutzerPwZuKurz = new Benutzer("Kurz", kurz);
+        Benutzer benutzerPwZuLang = new Benutzer("Lang", lang);
 
         System.out.println("Benutzer1 = " + benutzer1.toString());
         System.out.println("Benutzer1clone = " + benutzer1clone.toString());
         System.out.println("Benutzer2 = " + benutzer2.toString());
-        System.out.println("BenutzerZuKurz = " + benutzerZuKurz.toString());
-        System.out.println("BenutzerZuLang = " + benutzerZuLang.toString());
+        System.out.println("BenutzerPwZuKurz = " + benutzerPwZuKurz.toString());
+        System.out.println("BenutzerPwZuLang = " + benutzerPwZuLang.toString());
         System.out.println("");
 
         System.out.println("Benutzer1.equals(Benutzer1): " 
@@ -40,27 +40,25 @@ public class Praktikum2 {
         System.out.println("Benutzer1.equals(Benutzer1Clone): " 
                 + benutzer1.equals(benutzer1clone));
 
-        System.out.println("Benutzer1 == Benutzer1: " 
-                + (benutzer1 == benutzer1));
         System.out.println("Benutzer1 == Benutzer2: " 
                 + (benutzer1 == benutzer2));
         System.out.println("Benutzer1 == Benutzer1Clone: " 
                 + (benutzer1 == benutzer1clone));
         System.out.println("");
 
-        // Add user to the user list. No exception should be thrown here.
+        // Add user to the user list whose pw is too short.
         System.out.println("Test: Passwort zu kurz...");
         try {
-            admin.benutzerEintragen(benutzerZuKurz);
+            admin.benutzerEintragen(benutzerPwZuKurz);
             System.out.println("BenutzerZuKurz hinzugefuegt");
         } catch (Exception e) {
             System.out.println("Exception aufgefangen: " + e.getMessage());
         }
 
-        // Add user to the user list. No exception should be thrown here.
+        // Add user to the user list whose pw is too long.
         System.out.println("Test: Passwort zu lang...");
         try {
-            admin.benutzerEintragen(benutzerZuLang);
+            admin.benutzerEintragen(benutzerPwZuLang);
             System.out.println("BenutzerZuKurz hinzugefuegt");
         } catch (Exception e) {
             System.out.println("Exception aufgefangen: " + e.getMessage());

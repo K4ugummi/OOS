@@ -55,7 +55,7 @@ interface Geometrie {
  * 
  * @author Stephan Schauerte
  */
-class Rechteck implements Geometrie, Comparable {
+class Rechteck implements Geometrie, Comparable<Object> {
     /**
      * Minimum spanning Point 
      */

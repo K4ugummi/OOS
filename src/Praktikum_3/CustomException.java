@@ -1,4 +1,4 @@
-package Praktikum_2;
+package Praktikum_3;
 
 /**
  * Throw this exception when a user already exists but the action requires a new
@@ -76,41 +76,23 @@ class BenutzerVerwaltungsSystem extends Exception {
  * @author Stephan Schauerte
  *
  */
-class PasswortRichtlinie extends Exception {
+class BenutzerRichtlinie extends Exception {
     /**
      * I don't know why Eclipse wanted me to add this.
      */
     private static final long serialVersionUID = 4135657110606156348L;
+    
+    int min;
+    int max;
 
     /**
      * Create a new PasswortRichtlinie exception.
      * 
      * @param msg Detailed description of what went wrong.
      */
-    public PasswortRichtlinie(String msg) {
+    public BenutzerRichtlinie(String msg, int min, int max) {
         super(msg);
-    }
-}
-
-
-/**
- * Throw this exception when there are user name issues.
- * 
- * @author Stephan Schauerte
- *
- */
-class BenutzerRichtlinie extends Exception {
-    /**
-     * I don't know why Eclipse wanted me to add this.
-     */
-    private static final long serialVersionUID = -936701596708841038L;
-
-    /**
-     * Create a new BenutzerRichtlinie exception.
-     * 
-     * @param msg Detailed description of what went wrong.
-     */
-    public BenutzerRichtlinie(String msg) {
-        super(msg);
+        this.min = min;
+        this.max = max;
     }
 }

@@ -12,12 +12,22 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
     /**
      * Defines a maximum password length for a new user..
      */
-    private static final int PASSWORT_MAX = 32;
+    private static final int PASSWORT_MAX_LENGTH = 32;
 
     /**
      * Defines a minimum password length for a new user.
      */
-    private static final int PASSWORT_MIN = 4;
+    private static final int PASSWORT_MIN_LENGTH = 4;
+
+    /**
+     * Defines a maximum password length for a new user..
+     */
+    private static final int BENUTZER_MAX_LENGTH = 16;
+
+    /**
+     * Defines a minimum password length for a new user.
+     */
+    private static final int BENUTZER_MIN_LENGTH = 6;
 
     /// Better use a hash map for a large amount of users.
     private Vector<Benutzer> benutzerListe;
@@ -40,14 +50,23 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
             throw new BenutzerVorhanden("Der Benutzer existiert bereits!");
         } else {
             // Check settings like password length.
-            if (benutzer.passWort.length < 4) {
+            if (benutzer.passWort.length < PASSWORT_MIN_LENGTH) {
                 throw new PasswortRichtlinie(
-                        "Das passWort ist zu kurz!" + " Es sollte mindestens "
-                                + PASSWORT_MIN + " Zeichen lang sein");
-            } else if (benutzer.passWort.length > 32) {
+                        "Das passWort ist zu kurz! Es sollte mindestens "
+                                + PASSWORT_MIN_LENGTH + " Zeichen lang sein");
+            } else if (benutzer.passWort.length > PASSWORT_MAX_LENGTH) {
                 throw new PasswortRichtlinie(
-                        "Das passWort is zu lang!" + " Es sollte maximal "
-                                + PASSWORT_MAX + " Zeichen lang sein");
+                        "Das passWort is zu lang! Es sollte maximal "
+                                + PASSWORT_MAX_LENGTH + " Zeichen lang sein");
+            }
+            if (benutzer.userId.length() < BENUTZER_MIN_LENGTH) {
+                throw new PasswortRichtlinie(
+                        "Der Benutzername ist zu kurz! Er sollte mindestens "
+                                + BENUTZER_MIN_LENGTH + " Zeichen lang sein");
+            } else if (benutzer.userId.length() > BENUTZER_MAX_LENGTH) {
+                throw new PasswortRichtlinie(
+                        "Der Benutzername is zu lang!" + " Er sollte maximal "
+                                + BENUTZER_MAX_LENGTH + " Zeichen lang sein");
             }
 
             // Try to add the user.

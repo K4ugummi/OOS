@@ -7,6 +7,7 @@ public class SCE {
         long startTime = System.currentTimeMillis();
         
         boolean with_sce = true || doExpensiveTest();
+        System.out.println(with_sce);
         
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
@@ -16,6 +17,7 @@ public class SCE {
         startTime = System.currentTimeMillis();
         
         boolean without_sce = true | doExpensiveTest();
+        System.out.println(without_sce);
         
         stopTime = System.currentTimeMillis();
         elapsedTime = stopTime - startTime;
