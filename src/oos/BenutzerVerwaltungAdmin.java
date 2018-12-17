@@ -1,9 +1,11 @@
-package Praktikum_2;
-
+package oos;
 import java.util.Vector;
+
+import java.io.*;
 
 /**
  * Managing class that implements BenutzerVerwalrtung to handle users.
+ * 
  * @author Stephan Schauerte
  *
  */
@@ -12,31 +14,75 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
     /**
      * Defines a maximum password length for a new user..
      */
-    private static final int PASSWORT_MAX_LENGTH = 32;
+    static final int PASSWORT_MAX_LENGTH = 32;
 
     /**
      * Defines a minimum password length for a new user.
      */
-    private static final int PASSWORT_MIN_LENGTH = 4;
+    static final int PASSWORT_MIN_LENGTH = 4;
 
     /**
      * Defines a maximum password length for a new user..
      */
-    private static final int BENUTZER_MAX_LENGTH = 16;
+    static final int BENUTZER_MAX_LENGTH = 16;
 
     /**
      * Defines a minimum password length for a new user.
      */
-    private static final int BENUTZER_MIN_LENGTH = 6;
+    static final int BENUTZER_MIN_LENGTH = 6;
+
+    /**
+     * Defines the user database file path.
+     */
+    static final String USER_DB_PATH = "user.db";
 
     /// Better use a hash map for a large amount of users.
-    private Vector<Benutzer> benutzerListe;
+    Vector<Benutzer> benutzerListe;
 
     /**
      * Default contructor.
      */
     public BenutzerVerwaltungAdmin() {
         this.benutzerListe = new Vector<Benutzer>();
+        this.dbLesen();
+    }
+
+    void dbLoeschen() throws Exception {
+        File file = new File(USER_DB_PATH);
+        if (!file.delete()) {
+            throw new Exception("Could not delete db file.");
+        }
+    }
+
+    void dbInitialisieren() throws IOException {
+        this.benutzerListe = new Vector<Benutzer>();
+        this.dbSchreiben();
+    }
+
+    void dbLesen() {
+        try {
+            ObjectInputStream in = new ObjectInputStream(
+                    new FileInputStream(USER_DB_PATH));
+            this.benutzerListe = (Vector<Benutzer>) in.readObject();
+            in.close();
+        } catch (IOException e) {
+            System.out.println("dbLesen: " + e.getMessage() + " try again.");
+
+        } catch (ClassNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    void dbSchreiben() {
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream(USER_DB_PATH));
+            out.writeObject(this.benutzerListe);
+            out.close();
+        } catch (IOException e) {
+            System.err.println("dbSchreiben " + e.getMessage());
+        }
     }
 
     /**
@@ -45,32 +91,33 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
     @Override
     public void benutzerEintragen(Benutzer benutzer)
             throws BenutzerVerwaltungsSystem, BenutzerVorhanden,
-            PasswortRichtlinie {
+            BenutzerRichtlinie {
+
+        this.dbLesen();
+
         if (benutzerVorhanden(benutzer)) {
             throw new BenutzerVorhanden("Der Benutzer existiert bereits!");
         } else {
             // Check settings like password length.
             if (benutzer.passWort.length < PASSWORT_MIN_LENGTH) {
-                throw new PasswortRichtlinie(
-                        "Das passWort ist zu kurz! Es sollte mindestens "
-                                + PASSWORT_MIN_LENGTH + " Zeichen lang sein");
+                throw new BenutzerRichtlinie("passWor zu kurz",
+                        PASSWORT_MIN_LENGTH, PASSWORT_MAX_LENGTH);
             } else if (benutzer.passWort.length > PASSWORT_MAX_LENGTH) {
-                throw new PasswortRichtlinie(
-                        "Das passWort is zu lang! Es sollte maximal "
-                                + PASSWORT_MAX_LENGTH + " Zeichen lang sein");
+                throw new BenutzerRichtlinie("passWort zu lang",
+                        PASSWORT_MIN_LENGTH, PASSWORT_MAX_LENGTH);
             }
             if (benutzer.userId.length() < BENUTZER_MIN_LENGTH) {
-                throw new PasswortRichtlinie(
-                        "Der Benutzername ist zu kurz! Er sollte mindestens "
-                                + BENUTZER_MIN_LENGTH + " Zeichen lang sein");
+                throw new BenutzerRichtlinie("userId zu kurz",
+                        BENUTZER_MIN_LENGTH, BENUTZER_MAX_LENGTH);
             } else if (benutzer.userId.length() > BENUTZER_MAX_LENGTH) {
-                throw new PasswortRichtlinie(
-                        "Der Benutzername is zu lang!" + " Er sollte maximal "
-                                + BENUTZER_MAX_LENGTH + " Zeichen lang sein");
+                throw new BenutzerRichtlinie("userId zu lang",
+                        BENUTZER_MIN_LENGTH, BENUTZER_MAX_LENGTH);
             }
 
             // Try to add the user.
-            if (!this.benutzerListe.add(benutzer)) {
+            if (this.benutzerListe.add(benutzer)) {
+                this.dbSchreiben();
+            } else {
                 throw new BenutzerVerwaltungsSystem("Unbekannter Fehler :(");
             }
         }
@@ -89,8 +136,13 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
      */
     public void benutzerLoeschen(Benutzer benutzer)
             throws BenutzerVerwaltungsSystem, BenutzerNichtVorhanden {
+
+        this.dbLesen();
+
         if (benutzerOk(benutzer)) {
-            if (!this.benutzerListe.remove(benutzer)) {
+            if (this.benutzerListe.remove(benutzer)) {
+                this.dbSchreiben();
+            } else {
                 throw new BenutzerVerwaltungsSystem("Unbekannter Fehler :(");
             }
         } else {

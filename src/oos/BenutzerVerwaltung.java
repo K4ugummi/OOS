@@ -1,5 +1,4 @@
-package Praktikum_3;
-
+package oos;
 /**
  * Public interface to allow user registration.
  * 
@@ -18,8 +17,8 @@ public interface BenutzerVerwaltung {
      * @throws PasswortRichtlinie
      *             Conflict with the password policy.
      */
-    void benutzerEintragen(Benutzer benutzer) throws 
-        BenutzerVerwaltungsSystem, BenutzerVorhanden, BenutzerRichtlinie;
+    void benutzerEintragen(Benutzer benutzer) throws BenutzerVerwaltungsSystem,
+            BenutzerVorhanden, BenutzerRichtlinie;
 
     /**
      * Check if a user <b>benutzer</b> is already inside the list of registered

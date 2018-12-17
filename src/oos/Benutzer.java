@@ -1,4 +1,6 @@
-package Praktikum_2;
+package oos;
+
+import java.io.Serializable;
 
 /**
  * User account information.
@@ -8,7 +10,12 @@ package Praktikum_2;
  * @author Stephan Schauerte
  *
  */
-public class Benutzer {
+public class Benutzer implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -5055085168596333609L;
+
     /**
      * The user id is a unique String representing the user.
      */
@@ -60,7 +67,7 @@ public class Benutzer {
      * Override the toString() method for Benutzer.
      */
     public String toString() {
-        return "Benutzer { userId:" + this.userId + " passWort: "
+        return "Benutzer { userId:" + this.userId + " passWort:"
                 + String.copyValueOf(this.passWort) + " }";
     }
 }

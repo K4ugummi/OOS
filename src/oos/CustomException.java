@@ -1,4 +1,4 @@
-package Praktikum_4;
+package oos;
 
 /**
  * Throw this exception when a user already exists but the action requires a new
@@ -17,7 +17,8 @@ class BenutzerVorhanden extends Exception {
     /**
      * Create a new BenutzerVorhanden exception.
      * 
-     * @param msg Detailed description of what went wrong.
+     * @param msg
+     *            Detailed description of what went wrong.
      */
     public BenutzerVorhanden(String msg) {
         super(msg);
@@ -40,7 +41,8 @@ class BenutzerNichtVorhanden extends Exception {
     /**
      * Create a new BenutzerNichtVorhanden exception.
      * 
-     * @param msg Detailed description of what went wrong.
+     * @param msg
+     *            Detailed description of what went wrong.
      */
     public BenutzerNichtVorhanden(String msg) {
         super(msg);
@@ -63,7 +65,8 @@ class BenutzerVerwaltungsSystem extends Exception {
     /**
      * Create a new BenutzerBerwaltungsSystem exception.
      * 
-     * @param msg Detailed description of what went wrong.
+     * @param msg
+     *            Detailed description of what went wrong.
      */
     public BenutzerVerwaltungsSystem(String msg) {
         super(msg);
@@ -81,14 +84,16 @@ class BenutzerRichtlinie extends Exception {
      * I don't know why Eclipse wanted me to add this.
      */
     private static final long serialVersionUID = 4135657110606156348L;
-    
+
     int min;
+
     int max;
 
     /**
      * Create a new PasswortRichtlinie exception.
      * 
-     * @param msg Detailed description of what went wrong.
+     * @param msg
+     *            Detailed description of what went wrong.
      */
     public BenutzerRichtlinie(String msg, int min, int max) {
         super(msg);
