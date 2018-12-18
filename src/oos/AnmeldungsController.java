@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AnmeldungsController extends Application {
+    private boolean hasErrors = false;
+    private String hintString = "";
 
     @FXML private Button btAusfuehren;
     @FXML private Label lbNeuAnmeldung;
@@ -28,27 +30,81 @@ public class AnmeldungsController extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent loader = FXMLLoader.load(getClass().getResource("anmeldung.fxml"));
         //loader.get
-        primaryStage.setTitle("AnwendungsController");
+        primaryStage.setTitle("AnmeldungsController");
         primaryStage.setScene(new Scene(loader, 430, 300));
         primaryStage.show();
     }
     
     @FXML
     private void onBtAusfuehrenClick() {
-        System.out.println("AUSFUEHREN");
-        String userID = tfUserID.getText();
-        String passWort = pfPasswort.getText();
-        String wiederholung = pfWiederholung.getText();
-        
-        if (passWort.equals(wiederholung)) {
-            this.lbHint.setVisible(false);
-            pfPasswort.setStyle("-fx-text-fill: black;");
-            pfWiederholung.setStyle("-fx-text-fill: black;");
+        if (this.checkOkay()) {
+            String userID = tfUserID.getText();
+            String passWort = pfPasswort.getText();
             
             Benutzer benutzer = new Benutzer(userID, passWort.toCharArray());
             System.out.println(benutzer.toString());
         }
+    }
+    
+    private boolean checkOkay() {
+        this.resetErrors();
+        this.checkEmptyID();
+        this.checkEmptyPasswort();
+        this.checkEmptyWiederholung();
+        this.checkPasswortMatch();
+        
+        if (this.hasErrors) {
+            this.lbHint.setText(this.hintString);
+            this.lbHint.setVisible(true);
+            return false;
+        }
         else {
+            return true;
+        }
+    }
+    
+    private void resetErrors() {
+        this.hasErrors = false;
+        this.lbHint.setVisible(false);
+        this.hintString = "Error:";
+        
+        pfPasswort.setStyle("-fx-text-fill: black;");
+        pfWiederholung.setStyle("-fx-text-fill: black;");
+        
+        tfUserID.setStyle("-fx-border-color: black;");
+        pfPasswort.setStyle("-fx-border-color: black;");
+        pfWiederholung.setStyle("-fx-border-color: black;");
+    }
+    
+    private void checkEmptyID() {
+        if (this.tfUserID.getText().length() == 0) {
+            this.hasErrors = true;
+            this.hintString += " empty ID;";
+            tfUserID.setStyle("-fx-border-color: red;");
+        }
+    }
+    
+    private void checkEmptyPasswort() {
+        if (this.tfUserID.getText().length() == 0) {
+            this.hasErrors = true;
+            this.hintString += " empty Passwort;";
+            pfPasswort.setStyle("-fx-border-color: red;");
+            
+        }
+    }
+    
+    private void checkEmptyWiederholung() {
+        if (this.tfUserID.getText().length() == 0) {
+            this.hasErrors = true;
+            this.hintString += " empty Wiederholung;";
+            pfWiederholung.setStyle("-fx-border-color: red;");
+        }
+    }
+    
+    private void checkPasswortMatch() {
+        if (!this.pfPasswort.getText().equals(this.pfWiederholung.getText())) {
+            this.hasErrors = true;
+            this.hintString += " Passwort != Wiederholung;";
             this.lbHint.setVisible(true);
             pfPasswort.setStyle("-fx-text-fill: red;");
             pfWiederholung.setStyle("-fx-text-fill: red;");

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="310.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="oos.LoginController">
+<AnchorPane prefHeight="310.0" prefWidth="350.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oos.LoginController">
    <children>
       <Label fx:id="lbBenutzerverwaltung" layoutX="22.0" layoutY="19.0" text="Benutzerverwaltung">
          <font>
@@ -17,6 +16,7 @@
          </font>
       </Label>
       <TextField fx:id="tfUserID" layoutX="143.0" layoutY="85.0" />
+            <PasswordField fx:id="pfPasswort" layoutX="143.0" layoutY="141.0" />
       <Label fx:id="lbUserID" layoutX="30.0" layoutY="88.0" text="UserID">
          <font>
             <Font size="18.0" />
@@ -33,6 +33,7 @@
          </font>
       </CheckBox>
       <Button fx:id="btAusfuehren" layoutX="30.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btAusfuehrenClick" text="Ausfuehren" />
-      <PasswordField fx:id="pfPasswort" layoutX="143.0" layoutY="141.0" />
+      <Button fx:id="btAbbrechen" layoutX="221.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btAbbrechenClick" text="Abbrechen" />
+
    </children>
 </AnchorPane>

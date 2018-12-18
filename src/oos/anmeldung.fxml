@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="300.0" prefWidth="431.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="oos.AnmeldungsController">
+<AnchorPane prefHeight="300.0" prefWidth="431.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oos.AnmeldungsController">
    <children>
       <Label fx:id="lbNeuAnmeldung" layoutX="14.0" layoutY="11.0" text="Neu-Anmeldung">
          <font>
@@ -49,7 +48,7 @@
                </font>
             </Label>
             <Button fx:id="btAusfuehren" mnemonicParsing="false" onMouseClicked="#onBtAusfuehrenClick" text="Ausfuehren" GridPane.rowIndex="3" />
-            <Label fx:id="lbHint" prefHeight="16.0" prefWidth="200.0" text="Passwörter sind nicht gleich!" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="lbHint" prefHeight="75.0" prefWidth="192.0" text="HINT" textFill="RED" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
    </children>

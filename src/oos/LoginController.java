@@ -16,8 +16,10 @@ import javafx.stage.Stage;
 public class LoginController extends Application {
     
     private boolean neuAnmeldung = false;
-    
+    private boolean hasErrors = false;
+
     @FXML private Button btAusfuehren;
+    @FXML private Button btAbbrechen;
     @FXML private CheckBox cbNeuAnmeldung;
     @FXML private Label lbUserID;
     @FXML private Label lbPasswort;
@@ -45,11 +47,42 @@ public class LoginController extends Application {
         String passWort = this.pfPasswort.getText();
         Benutzer benutzer = new Benutzer(userID, passWort.toCharArray());
         
-        System.out.println(benutzer.toString());
+        this.resetError();
+        this.checkEmptyID();
+        this.checkEmptyPasswort();
         
+        if (!this.hasErrors) {
+            System.out.println(benutzer.toString());
+            Platform.exit();
+        }
+    }
+    
+    @FXML
+    private void btAbbrechenClick() {
+        System.out.println("Abbruch");
         Platform.exit();
     }
-
+    
+    private void resetError() {
+        this.hasErrors = false;
+        tfUserID.setStyle("-fx-border-color: black;");
+        pfPasswort.setStyle("-fx-border-color: black;");
+    }
+    
+    private void checkEmptyID() {
+        if (this.tfUserID.getText().length() == 0) {
+            this.hasErrors = true;
+            tfUserID.setStyle("-fx-border-color: red;");
+        }
+    }
+    
+    private void checkEmptyPasswort() {
+        if (this.pfPasswort.getText().length() == 0) {
+            this.hasErrors = true;
+            pfPasswort.setStyle("-fx-border-color: red;");
+        }
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }
