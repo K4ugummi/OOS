@@ -1,4 +1,4 @@
-package oos;
+package prak4client;
 
 import java.io.BufferedReader;
 import java.io.IOException;

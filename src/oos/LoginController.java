@@ -66,13 +66,18 @@ public class LoginController extends Application {
         String passWort = this.pfPasswort.getText();
         Benutzer benutzer = new Benutzer(userID, passWort.toCharArray());
         
-        this.resetError();
-        this.checkEmptyID();
-        this.checkEmptyPasswort();
-        
-        if (!this.hasErrors) {
-            System.out.println(benutzer.toString());
-            Platform.exit();
+        if (this.neuAnmeldung) {
+            this.application.neuAnmeldung();
+        }
+        else {
+            this.resetError();
+            this.checkEmptyID();
+            this.checkEmptyPasswort();
+            
+            if (!this.hasErrors) {
+                System.out.println(benutzer.toString());
+                this.application.benutzerLogin(benutzer);
+            }
         }
     }
     

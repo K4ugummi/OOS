@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="199.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oos.AnwendungsController">
+   <children>
+      <Label layoutX="8.0" layoutY="25.0" text="Sie können das System nun verwenden">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonCancel" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#onCancelClick" text="Abbrechen" />
+   </children>
+</AnchorPane>

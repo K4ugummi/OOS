@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="376.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oos.LoginController">
+   <children>
+      <Label fx:id="lbBenutzerverwaltung" layoutX="22.0" layoutY="19.0" text="Benutzerverwaltung">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfUserID" layoutX="143.0" layoutY="85.0" />
+            <PasswordField fx:id="pfPasswort" layoutX="143.0" layoutY="141.0" />
+      <Label fx:id="lbUserID" layoutX="30.0" layoutY="88.0" text="UserID">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbPasswort" layoutX="30.0" layoutY="145.0" text="Passwort">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbNeuAnmeldung" layoutX="30.0" layoutY="203.0" mnemonicParsing="false" onMouseClicked="#onCbNeuAnmeldungClick" text="Neu Anmeldung">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <Button fx:id="btAusfuehren" layoutX="34.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#btAusfuehrenClick" text="Ausfuehren" />
+      <Button fx:id="btAbbrechen" layoutX="221.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btAbbrechenClick" text="Abbrechen" />
+
+   </children>
+</AnchorPane>

@@ -1,4 +1,4 @@
-package oos;
+package prak4client;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import prak4gemklassen.Benutzer;
 
 /**
  * Controller to register a new Benutzer.
