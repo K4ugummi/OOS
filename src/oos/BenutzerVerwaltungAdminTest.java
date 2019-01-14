@@ -25,7 +25,6 @@ public class BenutzerVerwaltungAdminTest {
 
     @Test
     public void testConstructor() {
-        System.out.println("testAconstructor()");
         BenutzerVerwaltungAdmin admin = new BenutzerVerwaltungAdmin();
         assertEquals(0, admin.benutzerListe.size());
     }

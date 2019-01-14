@@ -11,9 +11,23 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller to register a new Benutzer.
+ * @author stephan
+ *
+ */
 public class AnmeldungsController extends Application {
+    
+    /**
+     * Stores if the form has input errors.
+     */
     private boolean hasErrors = false;
+    /**
+     * Stores all error messages to display via a labels text.
+     */
     private String hintString = "";
+    
+    private MainApplication application;
 
     @FXML private Button btAusfuehren;
     @FXML private Label lbNeuAnmeldung;
@@ -26,6 +40,11 @@ public class AnmeldungsController extends Application {
     @FXML private PasswordField pfWiederholung;
     
 
+    void setMainApplication(MainApplication application) { this.application = application; }
+
+    /**
+     * Application start function. Initialize the form.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent loader = FXMLLoader.load(getClass().getResource("anmeldung.fxml"));
@@ -34,18 +53,12 @@ public class AnmeldungsController extends Application {
         primaryStage.setScene(new Scene(loader, 430, 300));
         primaryStage.show();
     }
-    
-    @FXML
-    private void onBtAusfuehrenClick() {
-        if (this.checkOkay()) {
-            String userID = tfUserID.getText();
-            String passWort = pfPasswort.getText();
-            
-            Benutzer benutzer = new Benutzer(userID, passWort.toCharArray());
-            System.out.println(benutzer.toString());
-        }
-    }
-    
+
+    /**
+     * Check if no input errors exist. Returns true if every input field is
+     * valid.
+     * @return
+     */
     private boolean checkOkay() {
         this.resetErrors();
         this.checkEmptyID();
@@ -62,7 +75,9 @@ public class AnmeldungsController extends Application {
             return true;
         }
     }
-    
+    /**
+     * Reset all errors on this form.
+     */
     private void resetErrors() {
         this.hasErrors = false;
         this.lbHint.setVisible(false);
@@ -76,16 +91,36 @@ public class AnmeldungsController extends Application {
         pfWiederholung.setStyle("-fx-border-color: black;");
     }
     
+    /**
+     * Button Ausfuehren is clicked.
+     */
+    @FXML
+    private void onBtAusfuehrenClick() {
+        if (this.checkOkay()) {
+            String userID = tfUserID.getText();
+            String passWort = pfPasswort.getText();
+            
+            Benutzer benutzer = new Benutzer(userID, passWort.toCharArray());
+            System.out.println(benutzer.toString());
+        }
+    }
+    
+    /**
+     * Check if UserID field is empty. Set error to true if it is.
+     */
     private void checkEmptyID() {
-        if (this.tfUserID.getText().length() == 0) {
+        if (this.tfUserID.getText().isEmpty()) {
             this.hasErrors = true;
             this.hintString += " empty ID;";
             tfUserID.setStyle("-fx-border-color: red;");
         }
     }
     
+    /**
+     * Check if Passwort field is empty. Set error to true if it is.
+     */
     private void checkEmptyPasswort() {
-        if (this.tfUserID.getText().length() == 0) {
+        if (this.tfUserID.getText().isEmpty()) {
             this.hasErrors = true;
             this.hintString += " empty Passwort;";
             pfPasswort.setStyle("-fx-border-color: red;");
@@ -93,14 +128,21 @@ public class AnmeldungsController extends Application {
         }
     }
     
+    /**
+     * Check if Wiederholung field is empty. Set error to true if it is.
+     */
     private void checkEmptyWiederholung() {
-        if (this.tfUserID.getText().length() == 0) {
+        if (this.tfUserID.getText().isEmpty()) {
             this.hasErrors = true;
             this.hintString += " empty Wiederholung;";
             pfWiederholung.setStyle("-fx-border-color: red;");
         }
     }
     
+    /**
+     * Check if Passwort and Wiederholung are equal. Set error to true if they
+     * are not.
+     */
     private void checkPasswortMatch() {
         if (!this.pfPasswort.getText().equals(this.pfWiederholung.getText())) {
             this.hasErrors = true;
@@ -111,6 +153,10 @@ public class AnmeldungsController extends Application {
         }
     }
     
+    /**
+     * Start this form.
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
