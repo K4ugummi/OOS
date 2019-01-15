@@ -9,189 +9,147 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import prak4gemklassen.*;
 
 public class Client extends Application {
-    public BenutzerVerwaltung Adm;
-    
+    public BenutzerVerwaltung benutzerVerwaltung;
+
     private Stage stage;
-    
+
     private LoginController loginController;
-    
+
     private AnmeldungsController anmeldungsController;
-    
+
     private boolean lokal;
-    
+
     public Client() throws ClassNotFoundException, IOException {
-        this.Adm = new BenutzerVerwaltungAdmin();
+        this.benutzerVerwaltung = new BenutzerVerwaltungAdmin();
     }
-    
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Erzeugung eines Objekts der Klasse BenutzerVerwaltungAdmin
-        this.Adm = new BenutzerVerwaltungAdmin();
-        
-        //Anfrage an den Benutzer, ob die Datenhaltung initialisiert werden soll
-        System.out.println("Soll die Datenhaltung initialisiert werden (0/1)?");
+        this.benutzerVerwaltung = new BenutzerVerwaltungAdmin();
+
+        boolean isValidInput = false;
         int dbInitialisieren = -1;
-        boolean check = true;
         do {
-            try {
-                if (check == false) {
-                    System.out.println("Ungültige Eingabe!");
-                }
-                BufferedReader din = new BufferedReader(new InputStreamReader(System.in));
-                dbInitialisieren = Integer.parseInt(din.readLine());
-                if (dbInitialisieren == 0 || dbInitialisieren == 1) {
-                    check = true;
-                }
-                else {
-                    check = false;
-                }
-            }catch(NumberFormatException | IOException f) {
-                f.printStackTrace();
-            }
-        }while(dbInitialisieren != 0 && dbInitialisieren != 1);
+            System.out.println("Do you want to initialize the Database? (0/1)");
+            BufferedReader din = new BufferedReader(
+                    new InputStreamReader(System.in));
+            dbInitialisieren = Integer.parseInt(din.readLine());
+            isValidInput = (dbInitialisieren == 0) || (dbInitialisieren == 1);
+        } while (!isValidInput);
+        
         if (dbInitialisieren == 1) {
-            ((BenutzerVerwaltungAdmin) Adm).dbInitialisieren();
-            System.out.println("Die Datenhaltung wurde initialisiert!");
+            ((BenutzerVerwaltungAdmin)this.benutzerVerwaltung).dbInitialisieren();
+            System.out.println("Initialized new db.");
         }
         else {
-            System.out.println("Die Datenhaltung wurde NICHT initialisiert!");
+            System.out.println("Continuing with existing db.");
         }
-        
-        //Erzeugung einer LoginScene mit Übergabe der eigenen Referenz an deren Controller
-        this.stage = primaryStage;
-        
-        try {
-             FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-             Parent root = (Parent)loader.load();
 
-             this.loginController = (LoginController)loader.getController();
-             this.loginController.setORB(this);
-             
-             this.stage.setTitle("Benutzerverwaltung");
-             this.stage.setScene(new Scene(root));
-             this.stage.show();
-          } catch(IOException e) {
-                e.printStackTrace();
-          }
-        
+        // Erzeugung einer LoginScene mit Übergabe der eigenen Referenz an deren
+        // Controller
+        this.stage = primaryStage;
+        this.setStage("login.fxml", "Login");
     }
-    
+
     /**
      * 
      */
     void neuAnmeldungLokal() {
         this.lokal = true;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("anmeldung.fxml"));
-            Parent root = (Parent) loader.load();
-            
-            this.anmeldungsController = (AnmeldungsController)loader.getController();
-            this.anmeldungsController.setORB(this);
-            
-            this.stage.setTitle("Neu-Anmeldung");
-            this.stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.setStage("anmeldung.fxml", "Anmeldung");
     }
-    
+
     /**
      * 
      */
     void neuAnmeldungRemote() {
         this.lokal = false;
+        this.setStage("anmeldung.fxml", "Anmeldung");
+    }
+
+    void neuerBenutzer(Benutzer benutzer) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("anmeldung.fxml"));
+            if (lokal) {
+                this.benutzerVerwaltung = new BenutzerVerwaltungAdmin();
+                ((BenutzerVerwaltungAdmin)this.benutzerVerwaltung).benutzerEintragen(benutzer);
+            } else {
+                this.benutzerVerwaltung = new ClientOrb();
+                ((ClientOrb)this.benutzerVerwaltung).benutzerEintragen(benutzer);
+            }
+        } catch (BenutzerVerwaltungsSystem | BenutzerVorhanden
+                | BenutzerRichtlinie e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("login.fxml"));
+            Parent root = (Parent) loader.load();
+
+            this.loginController = (LoginController) loader.getController();
+            this.loginController.setClient(this);
+
+            this.stage.setTitle("BenutzerVerwaltung");
+            this.stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
+
+    void benutzerLoginLokal(Benutzer benutzer) {
+        try {
+            if (((BenutzerVerwaltungAdmin)this.benutzerVerwaltung).benutzerOk(benutzer)) {
+                this.setStage("anwendung.fxml", "Anwendung");
+            } else {
+                this.loginController.setErrorMessage("Benutzer nicht vorhanden oder Passwort falsch!");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    void benutzerLoginRemote(Benutzer benutzer) {
+        try {
+            this.benutzerVerwaltung = new ClientOrb();
+            if (((ClientOrb)this.benutzerVerwaltung).benutzerOk(benutzer)) {
+                this.setStage("anwendung.fxml", "Anwendung");
+            } else {
+                this.loginController
+                        .setErrorMessage("Benutzer nicht vorhanden oder Passwort falsch!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void setStage(String file, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
             Parent root = (Parent) loader.load();
             
-            this.anmeldungsController = (AnmeldungsController)loader.getController();
-            this.anmeldungsController.setORB(this);
-            
-            this.stage.setTitle("Neu-Anmeldung");
+            System.out.println("setStage("+file+ ", " + title + ")");
+
+            if (file.equals("login.fxml")) {
+                this.loginController = (LoginController) loader.getController();
+                this.loginController.setClient(this);
+            }
+            else if (file.equals("anmeldung.fxml")) {
+                this.anmeldungsController = (AnmeldungsController) loader
+                        .getController();
+                this.anmeldungsController.setClient(this);
+            }
+
+            this.stage.setTitle(title);
             this.stage.setScene(new Scene(root));
+            this.stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
-    void neuerBenutzer(Benutzer benutzer) throws BenutzerEmptyException {
-        try {
-            if (lokal) {
-                Adm = new BenutzerVerwaltungAdmin();
-                Adm.benutzerEintragen(benutzer);
-            }
-            else {
-                Adm = new ClientOrb();
-                Adm.benutzerEintragen(benutzer);
-            }
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-                Parent root = (Parent) loader.load();
-                
-                this.loginController = (LoginController) loader.getController();
-                this.loginController.setORB(this);
-                
-                this.stage.setTitle("BenutzerVerwaltung");
-                this.stage.setScene(new Scene(root));
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-        }catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (BenutzerVergleichException e) {
-            this.anmeldungsController.showErrorMessage("Der Benutzer ist bereits vorhanden!");
-        }
-    }
-    
-    void benutzerLoginLokal(Benutzer benutzer) {
-        try {
-            Adm = new BenutzerVerwaltungAdmin();
-            if (Adm.benutzerOk(benutzer)) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("anwendung.FXML"));
-                    Parent root = (Parent) loader.load();
-                    
-                    this.stage.setTitle("Anwendung");
-                    this.stage.setScene(new Scene(root));
-                } catch(IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
-                this.loginController.showErrorMessage("Der Benutzer ist NICHT vorhanden!");
-            }
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    void benutzerLoginRemote(Benutzer benutzer) {
-        try {
-            Adm = new ClientOrb();
-            if (Adm.benutzerOk(benutzer)) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("anwendung.FXML"));
-                    Parent root = (Parent) loader.load();
-                    
-                    this.stage.setTitle("Anwendung");
-                    this.stage.setScene(new Scene(root));
-                } catch(IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else {
-                this.loginController.showErrorMessage("Der Benutzer ist NICHT vorhanden!");
-            }
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-    
+
     public static void main(String[] args) {
         launch(args);
     }

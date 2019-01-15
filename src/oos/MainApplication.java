@@ -38,7 +38,9 @@ public class MainApplication extends Application {
             this.benutzerVerwaltungAdmin.dbInitialisieren();
             System.out.println("Initialized new db.");
         }
-        System.out.println("ENDE");
+        else {
+            System.out.println("Continuing with existing db.");
+        }
 
         this.stage = primaryStage;
 

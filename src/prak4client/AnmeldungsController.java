@@ -14,42 +14,63 @@ import prak4gemklassen.Benutzer;
 
 /**
  * Controller to register a new Benutzer.
+ * 
  * @author stephan
  *
  */
 public class AnmeldungsController extends Application {
-    
+
     /**
      * Stores if the form has input errors.
      */
     private boolean hasErrors = false;
+
     /**
      * Stores all error messages to display via a labels text.
      */
     private String hintString = "";
-    
-    private MainApplication application;
 
-    @FXML private Button btAusfuehren;
-    @FXML private Label lbNeuAnmeldung;
-    @FXML private Label lbUserID;
-    @FXML private Label lbPasswort;
-    @FXML private Label lbWiederholung;
-    @FXML private Label lbHint;
-    @FXML private TextField tfUserID;
-    @FXML private PasswordField pfPasswort;
-    @FXML private PasswordField pfWiederholung;
-    
+    private Client client;
 
-    void setMainApplication(MainApplication application) { this.application = application; }
+    @FXML
+    private Button btAusfuehren;
+
+    @FXML
+    private Label lbNeuAnmeldung;
+
+    @FXML
+    private Label lbUserID;
+
+    @FXML
+    private Label lbPasswort;
+
+    @FXML
+    private Label lbWiederholung;
+
+    @FXML
+    private Label lbHint;
+
+    @FXML
+    private TextField tfUserID;
+
+    @FXML
+    private PasswordField pfPasswort;
+
+    @FXML
+    private PasswordField pfWiederholung;
+
+    void setClient(Client client) {
+        this.client = client;
+    }
 
     /**
      * Application start function. Initialize the form.
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent loader = FXMLLoader.load(getClass().getResource("anmeldung.fxml"));
-        //loader.get
+        Parent loader = FXMLLoader
+                .load(getClass().getResource("anmeldung.fxml"));
+        // loader.get
         primaryStage.setTitle("AnmeldungsController");
         primaryStage.setScene(new Scene(loader, 430, 300));
         primaryStage.show();
@@ -58,6 +79,7 @@ public class AnmeldungsController extends Application {
     /**
      * Check if no input errors exist. Returns true if every input field is
      * valid.
+     * 
      * @return
      */
     private boolean checkOkay() {
@@ -66,16 +88,16 @@ public class AnmeldungsController extends Application {
         this.checkEmptyPasswort();
         this.checkEmptyWiederholung();
         this.checkPasswortMatch();
-        
+
         if (this.hasErrors) {
             this.lbHint.setText(this.hintString);
             this.lbHint.setVisible(true);
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
+
     /**
      * Reset all errors on this form.
      */
@@ -83,15 +105,15 @@ public class AnmeldungsController extends Application {
         this.hasErrors = false;
         this.lbHint.setVisible(false);
         this.hintString = "Error:";
-        
+
         pfPasswort.setStyle("-fx-text-fill: black;");
         pfWiederholung.setStyle("-fx-text-fill: black;");
-        
+
         tfUserID.setStyle("-fx-border-color: black;");
         pfPasswort.setStyle("-fx-border-color: black;");
         pfWiederholung.setStyle("-fx-border-color: black;");
     }
-    
+
     /**
      * Button Ausfuehren is clicked.
      */
@@ -100,13 +122,13 @@ public class AnmeldungsController extends Application {
         if (this.checkOkay()) {
             String userID = tfUserID.getText();
             String passWort = pfPasswort.getText();
-            
+
             Benutzer benutzer = new Benutzer(userID, passWort.toCharArray());
-            this.application.neuerBenutzer(benutzer);
+            this.client.neuerBenutzer(benutzer);
             System.out.println(benutzer.toString());
         }
     }
-    
+
     /**
      * Check if UserID field is empty. Set error to true if it is.
      */
@@ -117,7 +139,7 @@ public class AnmeldungsController extends Application {
             tfUserID.setStyle("-fx-border-color: red;");
         }
     }
-    
+
     /**
      * Check if Passwort field is empty. Set error to true if it is.
      */
@@ -126,10 +148,10 @@ public class AnmeldungsController extends Application {
             this.hasErrors = true;
             this.hintString += " empty Passwort;";
             pfPasswort.setStyle("-fx-border-color: red;");
-            
+
         }
     }
-    
+
     /**
      * Check if Wiederholung field is empty. Set error to true if it is.
      */
@@ -140,7 +162,7 @@ public class AnmeldungsController extends Application {
             pfWiederholung.setStyle("-fx-border-color: red;");
         }
     }
-    
+
     /**
      * Check if Passwort and Wiederholung are equal. Set error to true if they
      * are not.
@@ -154,9 +176,10 @@ public class AnmeldungsController extends Application {
             pfWiederholung.setStyle("-fx-text-fill: red;");
         }
     }
-    
+
     /**
      * Start this form.
+     * 
      * @param args
      */
     public static void main(String[] args) {

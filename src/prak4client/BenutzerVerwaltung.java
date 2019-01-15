@@ -1,6 +1,7 @@
 package prak4client;
 
 import prak4gemklassen.*;
+
 /**
  * Public interface to allow user registration.
  * 

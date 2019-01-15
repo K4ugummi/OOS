@@ -32,8 +32,13 @@
             <Font size="14.0" />
          </font>
       </CheckBox>
-      <Button fx:id="btAusfuehren" layoutX="34.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#btAusfuehrenClick" text="Ausfuehren" />
-      <Button fx:id="btAbbrechen" layoutX="221.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btAbbrechenClick" text="Abbrechen" />
+      <Button fx:id="btAusfuehren" layoutX="37.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#btAusfuehrenClick" text="Ausfuehren" />
+      <Button fx:id="btAbbrechen" layoutX="224.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#btAbbrechenClick" text="Abbrechen" />
+      <CheckBox fx:id="cbRemote" layoutX="30.0" layoutY="236.0" mnemonicParsing="false" onMouseClicked="#onCbRemoteClick" text="Remote">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
 
    </children>
 </AnchorPane>

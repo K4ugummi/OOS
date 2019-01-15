@@ -11,7 +11,7 @@ import java.net.Socket;
 import prak4gemklassen.*;
 
 public class ServerOrb {
-    ServerOrb(BenutzerVerwaltungAdmin bv) throws IOException, ClassNotFoundException, BenutzerEmptyException {
+    ServerOrb(BenutzerVerwaltungAdmin bv) throws IOException, ClassNotFoundException {
         try {
             ServerSocket server = new ServerSocket(4711);
             
@@ -26,13 +26,9 @@ public class ServerOrb {
                 Benutzer par = (Benutzer) in.readObject();
                 
                 if (methode.equals("benutzerEintragen")) {
-                    try {
                         bv.benutzerEintragen(par);
                         out.writeObject("Benutzer remote eintragen erfolgreich!");
                         out.flush();
-                    } catch (BenutzerVergleichException f) {
-                        out.writeObject("BenutzerVergleichException");
-                    }
                 }
                 if (methode.equals("benutzerOk")) {
                     out.writeBoolean(bv.benutzerOk(par));
@@ -41,6 +37,15 @@ public class ServerOrb {
                 client.close();
             }
         } catch(IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (BenutzerVerwaltungsSystem e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (BenutzerVorhanden e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (BenutzerRichtlinie e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

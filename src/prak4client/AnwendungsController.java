@@ -1,4 +1,5 @@
 package prak4client;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -9,27 +10,31 @@ import javafx.scene.Scene;
 
 /**
  * First test of handling JavaFX and SceneBuilder
+ * 
  * @author stephan
  *
  */
 public class AnwendungsController extends Application {
-    
-    private MainApplication application;
-    
-    void setMainApplication(MainApplication application) { this.application = application; }
-      
+
+    private Client client;
+
+    void setClient(Client client) {
+        this.client = client;
+    }
+
     /**
      * Initialize and show this form.
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent loader = FXMLLoader.load(getClass().getResource("anwendung.fxml"));
-        //loader.get
+        Parent loader = FXMLLoader
+                .load(getClass().getResource("anwendung.fxml"));
+        // loader.get
         primaryStage.setTitle("AnwendungsController");
         primaryStage.setScene(new Scene(loader, 500, 200));
         primaryStage.show();
     }
-    
+
     /**
      * Executed if button Abbrechen is clicked.
      */
@@ -41,6 +46,7 @@ public class AnwendungsController extends Application {
 
     /**
      * Starts this form.
+     * 
      * @param args
      */
     public static void main(String[] args) {

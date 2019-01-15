@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="376.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="oos.LoginController">
+<AnchorPane prefHeight="376.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prak4client.LoginController">
    <children>
       <Label fx:id="lbBenutzerverwaltung" layoutX="22.0" layoutY="19.0" text="Benutzerverwaltung">
          <font>
@@ -32,8 +32,18 @@
             <Font size="14.0" />
          </font>
       </CheckBox>
-      <Button fx:id="btAusfuehren" layoutX="34.0" layoutY="254.0" mnemonicParsing="false" onMouseClicked="#btAusfuehrenClick" text="Ausfuehren" />
-      <Button fx:id="btAbbrechen" layoutX="221.0" layoutY="252.0" mnemonicParsing="false" onMouseClicked="#btAbbrechenClick" text="Abbrechen" />
+      <Button fx:id="btAusfuehren" layoutX="37.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#btAusfuehrenClick" text="Ausfuehren" />
+      <Button fx:id="btAbbrechen" layoutX="224.0" layoutY="288.0" mnemonicParsing="false" onMouseClicked="#btAbbrechenClick" text="Abbrechen" />
+      <CheckBox fx:id="cbRemote" layoutX="32.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#onCbRemoteClick" text="Remote">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <Label fx:id="lbErrorMessage" layoutX="31.0" layoutY="331.0" text="ErrorMessage" visible="false">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
 
    </children>
 </AnchorPane>

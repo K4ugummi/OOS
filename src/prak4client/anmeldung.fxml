@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="431.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="oos.AnmeldungsController">
+<AnchorPane prefHeight="300.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prak4client.AnmeldungsController">
    <children>
       <Label fx:id="lbNeuAnmeldung" layoutX="14.0" layoutY="11.0" text="Neu-Anmeldung">
          <font>
